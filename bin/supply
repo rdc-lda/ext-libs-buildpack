@@ -7,11 +7,12 @@ index=$4
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-JQ_BINARY=${DIR}../util/jq-linux64
+JQ_BINARY=${DIR}/../util/jq-linux64
 
 if [ ! -z "$ELBP_CONFIG_LIB_LOCATIONS" ]; then
 
-    echo '-----> Downloading external libraries...'
+    echo '-----> External Library Buildpack v1.0.0 | https://github.com/rdc-lda/ext-libs-buildpack.git'
+    echo '-----> Downloading external libraries:'
     mkdir -p $deps_path/app_libs
 
     for url in $(echo $ELBP_CONFIG_LIB_LOCATIONS | $JQ_BINARY -r '.[]'); do
