@@ -13,12 +13,12 @@ if [ ! -z "$ELBP_CONFIG_LIB_LOCATIONS" ]; then
 
     echo '-----> External Library Buildpack v1.0.0 | https://github.com/rdc-lda/ext-libs-buildpack.git'
     echo '-----> Downloading external libraries:'
-    mkdir -p $deps_path/app_libs
+    mkdir -p $deps_path/ext_libs
 
     for url in $(echo $ELBP_CONFIG_LIB_LOCATIONS | $JQ_BINARY -r '.[]'); do
        echo "       - $url"
        filename=$(echo "${url##*/}")
-       curl -s $url --output $deps_path/app_libs/$filename
+       curl -s $url --output $deps_path/ext_libs/$filename
     done
 
 else
