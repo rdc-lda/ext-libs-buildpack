@@ -1,12 +1,22 @@
 #!/bin/bash
 
-echo '\e[91m-----> \e[34mSupply \e[39mphase in ext-libs-buildpack'
-
 build_path=$1
 cache_path=$2
 deps_path=$3
 index=$4
 
-echo "Test" > $deps_path/test.txt
+if [ ! -z "$ELBP_CONFIG_LIB_LOCATIONS" ]; then
 
-exit 0
+    echo '-----> Downloading external libraries...'
+    mkdir -p $deps_path/app_libs
+
+    for url in $(echo $ELBP_CONFIG_LIB_LOCATIONS | jq -r '.[]'); do
+       echo "       - $url"
+       filename=$(echo "${url##*/}")
+       curl -s $url --output $deps_path/app_libs/$filename
+    done
+
+else
+    echo '-----> No external libraries found for downloading, skipping.'
+    exit 0
+fi
