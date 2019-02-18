@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo '########## Supply phase in ext-libs-buildpack'
+
+build_path = $1
+cache_path = $2
+deps_path = $3
+index = $4
+
+echo "Test" > $deps_path/test.txt
+
+exit 0
