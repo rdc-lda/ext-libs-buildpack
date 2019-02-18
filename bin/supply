@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x 
+#set -x 
 
 build_path=$1
 cache_path=$2
