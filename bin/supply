@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo '########## Supply phase in ext-libs-buildpack'
+echo '\e[91m-----> \e[34mSupply \e[39mphase in ext-libs-buildpack'
 
 build_path=$1
 cache_path=$2

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo '########## Detect phase in ext-libs-buildpack'
+echo '\e[91m-----> \e[34mDetect \e[39mphase in ext-libs-buildpack'
 
 exit 0

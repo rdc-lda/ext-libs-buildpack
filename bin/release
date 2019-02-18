@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo '########## Release phase in ext-libs-buildpack'
+echo '\e[91m-----> \e[34mRelease \e[39mphase in ext-libs-buildpack'
 
 exit 0
