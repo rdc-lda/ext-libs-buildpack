@@ -2,9 +2,15 @@
 
 CBX Extended Library buildpack for injecting deployment time 3rd party licensed libs into Cloud Foundry droplets.
 
-## Running the test app
+## Internals
 
-A test application has been provided in [this repository](https://bitbucket.org/igtbdigital/sb-classpath-client/src/master/).
+The buildpack detects if the variable `CBX_EXTLIB_LOCATIONS` has been set - no harm done if not set or empty, buildpack will exit gracefully allowing the next buildpack to complete.
+
+For each URI in specified in the variable `CBX_EXTLIB_LOCATIONS` (JSON Array). the buildpack will attempt to download the referenced file to the `deps/ext_lib` directory. Failure of this download will result into unsuccessful execution of the buildpack, hence breaking the deployment.
+
+## Example app
+
+An example application has been provided in [this repository](https://bitbucket.org/igtbdigital/sb-classpath-client/src/master/).
 
 A simple `cf push` would deploy the application below where the `ext-lib-buildpack` would download the required dependencies specified as a JSON array in `CBX_EXTLIB_LOCATIONS` to the `deps/ext_libs` directory in the droplet.
 
