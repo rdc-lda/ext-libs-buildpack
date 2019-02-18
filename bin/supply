@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x 
 
 build_path=$1
 cache_path=$2
@@ -9,16 +10,21 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 JQ_BINARY=${DIR}/../util/jq-linux64
 
-if [ ! -z "$ELBP_CONFIG_LIB_LOCATIONS" ]; then
+if [ ! -z "$CBX_EXTLIB_LOCATIONS" ]; then
 
     echo '-----> External Library Buildpack v1.0.0 | https://github.com/rdc-lda/ext-libs-buildpack.git'
     echo '-----> Downloading external libraries:'
     mkdir -p $deps_path/ext_libs
 
-    for url in $(echo $ELBP_CONFIG_LIB_LOCATIONS | $JQ_BINARY -r '.[]'); do
+    for url in $(echo $CBX_EXTLIB_LOCATIONS | $JQ_BINARY -r '.[]'); do
        echo "       - $url"
        filename=$(echo "${url##*/}")
-       curl -s $url --output $deps_path/ext_libs/$filename
+
+        curl -f -s $url --output $deps_path/ext_libs/$filename
+        if [ "$?" -ne 0 ]; then
+           echo "       - ERROR, cannot download external library, exit buildpack!"
+           exit 1 
+        fi
     done
 
 else
